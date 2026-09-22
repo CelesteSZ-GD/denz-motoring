@@ -180,6 +180,7 @@
   footer p { max-width: 38rem; }
   footer .fine { color: #8FA19E; font-size: .82rem; }
   footer .contact-link { color: #fff; }
+  footer .footer-address { margin-top: 1rem; }
   @media (min-width: 800px) { footer .wrap { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
@@ -458,7 +459,7 @@
   <div class="wrap">
     <div>
       <a class="brand" href="#top">DENZ MOTORING<small>Independent car buying consultation</small></a>
-      <p style="margin-top:1rem">Dubai, United Arab Emirates</p>
+      <p class="footer-address">Dubai, United Arab Emirates</p>
       <p>WhatsApp: <a class="contact-link" href="https://wa.me/971551766850" target="_blank" rel="noopener">+971 55 176 6850</a></p>
       <p>Trade licence no. [add after issue]</p>
     </div>
@@ -511,6 +512,13 @@
     r.addEventListener("change", function () { show("typeOtherBox", radioValue("vtype") === "Other"); });
   });
 
+  var budgetEl = document.getElementById("budget");
+  var purposeEl = document.getElementById("purpose");
+  var purposeOtherEl = document.getElementById("purposeOther");
+  var typeOtherEl = document.getElementById("typeOther");
+  var consentEl = document.getElementById("consent");
+  var modelsEl = document.getElementById("models");
+
   function validate() {
     var problems = [];
     var nameEl = document.getElementById("name");
@@ -521,20 +529,20 @@
     var checks = [
       ["f-name", nameEl.value.trim().length > 1, nameEl],
       ["f-phone", phone !== "", phoneEl],
-      ["f-budget", form.budget.value !== "", form.budget],
-      ["f-purpose", form.purpose.value !== "", form.purpose],
+      ["f-budget", budgetEl.value !== "", budgetEl],
+      ["f-purpose", purposeEl.value !== "", purposeEl],
       ["f-type", vtype !== "", form.querySelector('input[name="vtype"]')],
-      ["f-consent", form.consent.checked, form.consent]
+      ["f-consent", consentEl.checked, consentEl]
     ];
     checks.forEach(function (c) { setInvalid(c[0], !c[1]); if (!c[1]) { problems.push(c[2]); } });
 
-    var okPurposeOther = form.purpose.value !== "Other" || form.purposeOther.value.trim().length > 0;
+    var okPurposeOther = purposeEl.value !== "Other" || purposeOtherEl.value.trim().length > 0;
     setInvalid("purposeOtherBox", !okPurposeOther);
-    if (!okPurposeOther) { problems.push(form.purposeOther); }
+    if (!okPurposeOther) { problems.push(purposeOtherEl); }
 
-    var okTypeOther = vtype !== "Other" || form.typeOther.value.trim().length > 0;
+    var okTypeOther = vtype !== "Other" || typeOtherEl.value.trim().length > 0;
     setInvalid("typeOtherBox", !okTypeOther);
-    if (!okTypeOther) { problems.push(form.typeOther); }
+    if (!okTypeOther) { problems.push(typeOtherEl); }
 
     if (problems.length) { problems[0].focus(); return false; }
     phoneEl.value = phone;   // show the standard format back to the user
@@ -547,17 +555,18 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (form._honey && form._honey.value) { return; }   // bots fill the hidden field
+    var honeyEl = document.getElementById("company");
+    if (honeyEl && honeyEl.value) { return; }   // bots fill the hidden field
     if (!validate()) { return; }
 
     var vtype = radioValue("vtype");
     var data = {
       name: document.getElementById("name").value.trim(),
       phone: document.getElementById("phone").value,
-      budget: form.budget.value,
-      purpose: form.purpose.value === "Other" ? "Other: " + form.purposeOther.value.trim() : form.purpose.value,
-      vtype: vtype === "Other" ? "Other: " + form.typeOther.value.trim() : vtype,
-      models: form.models.value.trim() || "None given"
+      budget: budgetEl.value,
+      purpose: purposeEl.value === "Other" ? "Other: " + purposeOtherEl.value.trim() : purposeEl.value,
+      vtype: vtype === "Other" ? "Other: " + typeOtherEl.value.trim() : vtype,
+      models: modelsEl.value.trim() || "None given"
     };
 
     var text = [
