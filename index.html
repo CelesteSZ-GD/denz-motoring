@@ -37,8 +37,6 @@
   .btn[disabled] { opacity: .65; cursor: progress; }
   .btn-quiet { background: transparent; color: var(--salt); border: 1px solid rgba(237,241,239,.45); }
   .btn-quiet:hover { background: rgba(237,241,239,.1); }
-  .btn-wa { background: var(--petrol); color: #fff; }
-  .btn-wa:hover { background: var(--petrol-light); }
 
   /* Header */
   .site-header { background: var(--deep); color: var(--salt); }
@@ -152,10 +150,6 @@
   .invalid > .err, .invalid .err { display: block; }
   .invalid input[type=text], .invalid input[type=tel], .invalid select { border-color: var(--signal); }
   .form-note { margin-top: .9rem; font-size: .88rem; color: var(--muted); }
-  .form-status { margin-top: 1rem; font-size: .95rem; }
-  .form-status.error { color: var(--signal); }
-  .fallback { margin-top: 1rem; }
-  .fallback[hidden] { display: none; }
   .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   @media (min-width: 640px) { .field-row { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 960px) { .brief .wrap { grid-template-columns: .8fr 1.2fr; gap: 5rem; align-items: start; } }
@@ -404,19 +398,14 @@
           </div>
 
           <button class="btn" type="submit" id="submitBtn">Get my personalised plan</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          <div class="fallback" id="fallback" hidden>
-            <a class="btn btn-wa" id="waFallback" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
-          </div>
-          <p class="form-note">Your details are sent to DENZ MOTORING by email and used only to prepare your plan.</p>
+          <p class="form-note">Your details are sent to DENZ MOTORING on WhatsApp and used only to prepare your plan.</p>
         </form>
 
         <div class="done" id="done" tabindex="-1">
           <h3 id="doneTitle">Request received</h3>
-          <p>Thank you. We will review your brief and reply on WhatsApp.</p>
+          <p>Thank you. We've opened WhatsApp with your details so you can send them to Denz.</p>
           <div class="ref-big">We will reach you on<strong id="donePhone"></strong></div>
-          <p>Want a faster answer or have more questions? Talk to Denz directly.</p>
-          <a class="btn btn-wa" id="waLink" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <p id="donePopupNote" class="form-note" hidden>If WhatsApp did not open in a new tab, your browser may have blocked the pop-up. <a id="waRetry" href="#">Tap here to open it</a>.</p>
         </div>
       </div>
     </div>
@@ -470,17 +459,14 @@
 <script>
   // ===== CONFIG =====
   var CONFIG = {
-    whatsapp: "971551766850",        // WhatsApp number, digits only with country code
-    email: "nasldenz@gmail.com"      // inbox that receives every request
+    whatsapp: "971551766850"        // WhatsApp number, digits only with country code
   };
-  var ENDPOINT = "https://formsubmit.co/ajax/" + CONFIG.email;
   // ==================
 
   var form = document.getElementById("leadForm");
   var done = document.getElementById("done");
-  var statusEl = document.getElementById("formStatus");
-  var submitBtn = document.getElementById("submitBtn");
-  var fallback = document.getElementById("fallback");
+  var donePopupNote = document.getElementById("donePopupNote");
+  var waRetry = document.getElementById("waRetry");
 
   // Puts every phone number into one standard format (+971551234567)
   // so each user's number is recorded the same way. Returns "" if invalid.
@@ -580,57 +566,17 @@
     ].join("\n");
     var wa = waLink(text);
 
-    var payload = {
-      "_subject": "New plan request: " + data.name + " (" + data.phone + ")",
-      "_template": "table",
-      "Phone number (unique ID)": data.phone,
-      "Name": data.name,
-      "Budget": data.budget,
-      "Purpose of buying": data.purpose,
-      "Vehicle type": data.vtype,
-      "Specific models": data.models,
-      "Submitted": new Date().toISOString()
-    };
+    document.getElementById("donePhone").textContent = data.phone;
+    waRetry.href = wa;
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Sending...";
-    statusEl.className = "form-status";
-    statusEl.textContent = "";
-    fallback.hidden = true;
+    // Send the brief straight to WhatsApp, in a new tab so the site stays open.
+    var opened = window.open(wa, "_blank", "noopener");
+    donePopupNote.hidden = !!opened;   // only shown if the browser blocked the pop-up
 
-    var ctrl = new AbortController();
-    var timer = setTimeout(function () { ctrl.abort(); }, 15000);
-
-    fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload),
-      signal: ctrl.signal
-    })
-    .then(function (res) { return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, body: j }; }); })
-    .then(function (r) {
-      clearTimeout(timer);
-      var s = r.body && r.body.success;
-      if (r.ok && (s === true || s === "true")) {
-        document.getElementById("donePhone").textContent = data.phone;
-        document.getElementById("waLink").href = wa;
-        form.style.display = "none";
-        done.classList.add("show");
-        done.focus();
-        done.scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        throw new Error("not delivered");
-      }
-    })
-    .catch(function () {
-      clearTimeout(timer);
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Get my personalised plan";
-      statusEl.className = "form-status error";
-      statusEl.textContent = "We could not send your request by email. Please try again, or send the same details to us on WhatsApp.";
-      document.getElementById("waFallback").href = wa;
-      fallback.hidden = false;
-    });
+    form.style.display = "none";
+    done.classList.add("show");
+    done.focus();
+    done.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 </script>
 </body>
