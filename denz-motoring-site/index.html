@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DENZ MOTORING | Independent car buying consultation in Dubai</title>
+<meta name="description" content="Tell us your budget, purpose and the car you want. We build a personalised car buying plan from Dubai listings, starting from AED 59.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#fff;--t:#E6FEFF;--k:#021F21;--g:#014751;--g2:#036E7C;--o:#0A2342;--m:#4B6367;--l:#C9E4E6;--err:#A63A28;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Public Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:400 1rem/1.6 var(--sans);color:var(--k);background:var(--t);-webkit-font-smoothing:antialiased;padding:max(.75rem,env(safe-area-inset-top)) .75rem max(.75rem,env(safe-area-inset-bottom))}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(40rem 30rem at 12% 8%,rgba(1,71,81,.22),transparent 70%),radial-gradient(38rem 30rem at 92% 30%,rgba(10,35,66,.16),transparent 70%),radial-gradient(34rem 26rem at 40% 100%,rgba(3,110,124,.18),transparent 70%)}
+h1,h2,h3,p{margin:0}a{color:inherit}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+h1,h2{font-family:var(--serif);font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:.01em}
+h2{font-size:clamp(1.9rem,3.4vw,2.9rem)}
+.lbl{font:600 .72rem/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.wrap{max-width:1400px;margin:0 auto}
+/* header */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.7rem 1rem;margin-bottom:.75rem;background:rgba(255,255,255,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--l);border-radius:999px;box-shadow:0 14px 30px -20px rgba(2,31,33,.4);position:sticky;top:.5rem;z-index:10}
+.brand{font:700 1.15rem/1 var(--serif);letter-spacing:.14em;text-decoration:none;white-space:nowrap}
+.nav{display:flex;align-items:center;gap:1.25rem;font-size:.9rem}.nav a{text-decoration:none;color:var(--m)}.nav a:hover{color:var(--k)}
+.clock{font-size:.8rem;color:var(--m)}
+.promo{background:var(--g);color:#fff!important;font-weight:600;padding:.5rem .95rem;border-radius:999px;white-space:nowrap;font-size:.82rem}
+@media(max-width:820px){.nav a:not(.promo),.clock{display:none}}
+/* bento */
+.bento{display:grid;grid-template-columns:1fr;gap:1px;background:var(--l);border:1px solid var(--l);border-radius:22px;overflow:hidden;box-shadow:0 40px 70px -45px rgba(2,31,33,.5)}
+.tile{background:var(--p);padding:clamp(1.25rem,2.6vw,2rem);position:relative;overflow:hidden;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:1.25rem}
+.dk{background:var(--k);color:var(--t)}.ob{background:var(--o);color:var(--t)}.tn{background:var(--t)}
+@media(min-width:640px){.bento{grid-template-columns:repeat(2,1fr)}.s6,.s8,.s9,.s12{grid-column:1/-1}}
+@media(min-width:1000px){.bento{grid-template-columns:repeat(12,1fr)}.s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}.s8{grid-column:span 8}.s9{grid-column:span 9}.s12{grid-column:span 12}}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font:600 .95rem/1 var(--sans);padding:.95rem 1.4rem;border:0;border-radius:999px;background:var(--g);color:#fff;text-decoration:none;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:var(--g2);transform:translateY(-2px)}.btn[disabled]{opacity:.6;cursor:progress}
+.dk .btn,.ob .btn{background:var(--t);color:var(--k)}.dk .btn:hover,.ob .btn:hover{background:#fff}
+.btn.wa{background:var(--o)}.btn.line{background:transparent;color:inherit;border:1px solid currentColor}
+.arr{display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid currentColor;text-decoration:none;flex:none;background:none;cursor:pointer;color:inherit;font-size:1.05rem}
+.arr:hover{background:rgba(2,31,33,.06)}
+/* spatial */
+.tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;will-change:transform}
+[data-z]{transform:translate3d(var(--px,0),var(--py,0),0);transition:transform .25s ease-out}
+.js .rv{opacity:0;transform:translateY(26px) scale(.985)}.js .rv.in{opacity:1;transform:none;transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.orbit{position:relative;aspect-ratio:1;width:100%;max-width:340px;margin:auto;border:1px dashed currentColor;border-radius:50%;display:grid;place-items:center;opacity:.95}
+.orbit>i{position:absolute;inset:0;border-radius:50%;animation:spin 18s linear infinite}.orbit>i::before{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:currentColor}
+.orbit ul{list-style:none;margin:0;padding:0;font:600 .95rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;display:grid;gap:1.1rem;text-align:center}
+.orbit li{opacity:.4;transition:opacity .3s,transform .3s;cursor:default}.orbit li.on{opacity:1;transform:scale(1.12)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.disc{width:min(440px,100%);aspect-ratio:1;margin:auto;border-radius:50%;display:grid;place-items:center;text-align:center;padding:12%;background:rgba(255,255,255,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.9);box-shadow:0 30px 60px -30px rgba(2,31,33,.55),inset 0 1px 0 #fff;position:relative}
+.disc h1{font-size:clamp(2rem,4.6vw,3.6rem);margin:.6rem 0 1rem}
+.car{width:100%;color:currentColor}.car *{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vert{writing-mode:vertical-rl;transform:rotate(180deg);font:700 clamp(3.4rem,7vw,6rem)/.9 var(--serif);letter-spacing:.06em;color:var(--g);align-self:flex-start}
+.hero-a{min-height:520px;flex-direction:row;align-items:stretch}
+.hero-b{min-height:520px;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,var(--p),var(--t))}
+.big{font:500 clamp(1.5rem,2.6vw,2.4rem)/1.25 var(--serif)}.big b{font-weight:700}
+.cap{border-radius:999px;border:1px dashed currentColor;padding:1.4rem 2rem;display:flex;align-items:center;gap:1.5rem}
+.road{position:relative;min-height:260px;border-radius:120px;border:1px dashed currentColor;overflow:hidden}
+.road svg{position:absolute;inset:0;width:100%;height:100%}.road path{fill:none;stroke:currentColor;stroke-dasharray:6 8;stroke-width:1.5}
+.road b{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--t);offset-path:path('M20 200 C 150 40, 260 240, 380 60 S 560 40 640 120');animation:go 9s linear infinite}
+@keyframes go{to{offset-distance:100%}}
+.picks{display:grid;gap:1px;background:var(--l);border:1px solid var(--l);border-radius:16px;overflow:hidden}
+.pick{background:var(--p);padding:1rem 1.1rem}.pick strong{display:flex;justify-content:space-between;gap:1rem;font-weight:600}.pick strong span{font:700 1.25rem/1 var(--serif);white-space:nowrap}.pick small{display:block;color:var(--m);margin-top:.25rem}.pick em{display:block;font-style:normal;font-size:.9rem;margin-top:.4rem;padding-left:.7rem;border-left:2px solid var(--g)}
+@media(min-width:900px){.picks{grid-template-columns:repeat(3,1fr)}}
+.price{font:700 clamp(3rem,6vw,5rem)/1 var(--serif);color:var(--g)}
+/* showreel */
+.reel-media{position:relative}
+.reel-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(1) contrast(1.08)}
+.reel-media .ovl{position:relative;z-index:1;background:linear-gradient(180deg,rgba(230,254,255,0) 35%,rgba(230,254,255,.92) 100%);margin:-2rem;padding:2rem;min-height:320px;display:flex;align-items:flex-end}
+.reel-wrap{position:relative}
+.reel-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.4rem .2rem 1.1rem;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.reel-track::-webkit-scrollbar{height:6px}
+.reel-track::-webkit-scrollbar-thumb{background:var(--l);border-radius:999px}
+.reel-card{flex:0 0 auto;width:min(76vw,290px);scroll-snap-align:center;margin:0;border:1px solid var(--l);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 26px 50px -30px rgba(2,31,33,.4)}
+.reel-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.reel-card figcaption{padding:.8rem 1rem;font:600 .82rem/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--g);border-top:1px solid var(--l)}
+.reel-nav{display:flex;gap:.5rem;align-items:center}
+@media(min-width:1000px){.reel-card{width:260px}}
+/* form */
+form{display:grid;gap:1.1rem}.row{display:grid;gap:1.1rem}@media(min-width:640px){.row{grid-template-columns:1fr 1fr}}
+label,legend{display:block;font-weight:600;font-size:.9rem;margin-bottom:.35rem;padding:0}.hint{font-weight:400;color:var(--m)}
+input[type=text],input[type=tel],select{width:100%;font:400 1rem/1.4 var(--sans);color:var(--k);background:#fff;border:1px solid var(--l);border-radius:12px;padding:.8rem .9rem}
+fieldset{border:0;margin:0;padding:0}.seg{display:flex;flex-wrap:wrap;gap:.5rem}.seg label{margin:0;font-weight:500}.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:inline-block;padding:.65rem 1.1rem;border:1px solid var(--l);background:#fff;border-radius:999px;cursor:pointer}.seg input:checked+span{background:var(--g);border-color:var(--g);color:#fff}.seg input:focus-visible+span{outline:3px solid var(--g2);outline-offset:2px}
+.reveal{display:none;margin-top:.7rem}.reveal.show{display:block}
+.consent{display:flex;gap:.7rem;align-items:flex-start;font-size:.9rem;color:var(--m)}.consent input{margin-top:.3rem;accent-color:var(--g)}.consent label{font-weight:400;margin:0}
+.err{color:var(--err);font-size:.85rem;margin-top:.3rem;display:none}.invalid>.err,.invalid .err{display:block}.invalid input[type=text],.invalid input[type=tel],.invalid select{border-color:var(--err)}
+.status{font-size:.92rem}.status.error{color:var(--err)}.trap{position:absolute;left:-9999px}
+.done{display:none}.done.show{display:block}.done h3{font:700 2rem/1.1 var(--serif);text-transform:uppercase}.done p{margin:.7rem 0;color:var(--m)}.done strong{display:block;font:700 1.5rem/1.2 var(--serif);color:var(--k)}
+details{border-top:1px solid var(--l);padding:1rem 0}summary{font-weight:600;cursor:pointer}details p{margin-top:.5rem;color:var(--m)}
+.faq{columns:1}@media(min-width:900px){.faq{columns:2;column-gap:3rem}details{break-inside:avoid}}
+.fine{font-size:.82rem;color:var(--m)}
+@media(prefers-reduced-motion:reduce){.orbit>i,.road b{animation:none}.tilt,[data-z]{transform:none!important}.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="bar">
+  <a class="brand" href="#top">DENZ MOTORING</a>
+  <nav class="nav" aria-label="Main"><span class="clock" aria-hidden="true">Dubai <span id="clock"></span></span><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a class="promo" href="#brief">Starting from AED 59</a></nav>
+</header>
+
+<main class="bento" id="top">
+  <div class="tile tn s3 hero-a rv" aria-hidden="true"><div class="vert" data-z="8">DENZ</div><div class="lbl" style="align-self:flex-end;margin-left:auto">Motoring</div></div>
+  <section class="tile s6 hero-b rv" aria-labelledby="h1">
+    <div class="disc tilt" id="tilt1" data-z="0">
+      <div><p class="lbl">Independent car buying consultation</p><h1 id="h1">Your next car, already shortlisted.</h1>
+      <p style="color:var(--m);margin-bottom:1.2rem">Tell us your budget and what you need. We check Dubai listings and send the few cars worth your time.</p>
+      <a class="btn" href="#brief">Get my personalised plan <span aria-hidden="true">&#8599;</span></a></div>
+    </div>
+    <img class="car" data-z="14" src="assets/cars/gtr.png" alt="White Nissan GT-R Liberty Walk widebody" style="max-width:360px;width:100%;margin-top:1rem" loading="lazy">
+  </section>
+  <aside class="tile s3 hero-b rv" aria-label="Services"><div class="orbit tilt" data-orbit><i></i><ul><li>Shortlist</li><li>Inspection</li><li>Closing</li><li>Registration</li></ul></div><p class="lbl" style="text-align:center">New or used &middot; Dubai</p></aside>
+
+  <div class="tile s3 rv"><span class="lbl">Scroll down</span><a class="arr" href="#about" aria-label="Scroll to about">&darr;</a></div>
+  <div class="tile tn s6 rv"><span class="lbl">Need it faster?</span><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><p class="big">Talk to Denz directly.</p><a class="btn wa" href="https://wa.me/971551766850" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
+  <div class="tile s3 rv"><span class="lbl">Based in</span><p class="big">Dubai, UAE</p></div>
+
+  <!-- Showreel -->
+  <div class="tile ob s4 rv" id="showreel"><span class="lbl">Showreel</span><h2 style="font-size:clamp(1.6rem,2.8vw,2.4rem)">Precision, down to the detail.</h2><p class="fine" style="opacity:.85">Every car on our shortlist gets the same scrutiny &mdash; down to what's under the skin.</p></div>
+  <div class="tile s8 reel-media rv" style="padding:2rem;min-height:320px">
+    <video autoplay muted loop playsinline aria-hidden="true" poster="assets/xray/xray-1.jpg"><source src="assets/xray/reel-1.mp4" type="video/mp4"></video>
+    <div class="ovl"><p class="big" style="font-size:1.3rem">Engineering-grade checks, explained in plain language &mdash; not jargon.</p></div>
+  </div>
+
+  <div class="tile s12 reel-wrap rv" style="padding-bottom:1.25rem">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+      <h2 style="font-size:clamp(1.5rem,2.6vw,2.2rem)">Cars from our showreel</h2>
+      <div class="reel-nav"><button class="arr" id="reelPrev" type="button" aria-label="Scroll left">&larr;</button><button class="arr" id="reelNext" type="button" aria-label="Scroll right">&rarr;</button></div>
+    </div>
+    <div class="reel-track" id="reelTrack" tabindex="0" aria-label="Car poster showreel, scroll horizontally">
+      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/g63.jpg" alt="Mercedes-AMG G63 poster" loading="lazy"><figcaption>Mercedes-AMG G 63</figcaption></figure>
+      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/pista.jpg" alt="Ferrari 488 Pista poster" loading="lazy"><figcaption>Ferrari 488 Pista</figcaption></figure>
+      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/phantom.jpg" alt="Rolls-Royce Phantom VIII poster" loading="lazy"><figcaption>Rolls-Royce Phantom VIII</figcaption></figure>
+      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/p1.jpg" alt="McLaren P1 poster" loading="lazy"><figcaption>McLaren P1</figcaption></figure>
+      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/gt3rs.jpg" alt="Porsche 911 GT3 RS poster" loading="lazy"><figcaption>Porsche 911 GT3 RS</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="tile dk s3 rv" id="about"><h2>Who we are?</h2><a class="btn line" href="#why">Explore &#8599;</a></div>
+  <div class="tile dk s9 rv"><span class="lbl">/about</span><p class="big" style="font-size:clamp(1.6rem,3.4vw,3rem)">We are an <b>independent car buying consultation</b> service. We match busy people in Dubai with new or used cars that fit their budget and needs.</p></div>
+
+  <div class="tile ob s3 rv"><span class="lbl">Step one</span><div class="orbit" style="max-width:220px"><i></i><div style="text-align:center;padding:1rem"><p class="big" style="font-size:1.3rem">Send your brief</p></div></div><a class="btn" href="#brief">Open form</a></div>
+  <div class="tile dk s6 rv"><div class="cap" style="flex-wrap:wrap"><a class="arr" href="#sample" aria-label="See sample shortlist">&#9654;</a><p class="big" style="font-size:1.5rem">Meet a shortlist built around your brief.</p></div><img class="car" src="assets/cars/488.png" alt="Blue Ferrari 488 Pista" style="max-width:300px;width:100%;align-self:center" loading="lazy"></div>
+  <div class="tile s3 rv"><span class="lbl">Independent</span><p class="big">We do not sell cars.</p><p class="fine">Our advice is about which car fits you, not which one is in stock.</p></div>
+
+  <div class="tile s12 tn rv" id="sample"><div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline"><h2 style="font-size:clamp(1.5rem,2.6vw,2.2rem)">Family SUV, up to AED 90,000</h2><span class="lbl">Sample shortlist &middot; illustrative only</span></div>
+    <div class="picks">
+      <div class="pick"><strong>2021 Toyota RAV4 XLE<span>AED 84,500</span></strong><small>58,000 km, GCC specs, private seller</small><em>Service history is shown in the listing. Ask to see the records.</em></div>
+      <div class="pick"><strong>2020 Nissan X-Trail<span>AED 62,000</span></strong><small>71,000 km, GCC specs, dealer</small><em>Lowest price of the three, higher mileage. Inspect before paying a deposit.</em></div>
+      <div class="pick"><strong>2022 Hyundai Tucson<span>AED 79,900</span></strong><small>39,000 km, GCC specs, dealer</small><em>Lowest mileage in this budget. Check the warranty transfer.</em></div>
+    </div></div>
+
+  <div class="tile s3 rv" id="why"><h2>Why choose Denz?</h2><span class="lbl">Advice that works for you</span></div>
+  <div class="tile s3 rv"><span class="lbl">01</span><h3 class="big">Independent</h3><p class="fine">Our advice is about which car fits you, not which one is in stock.</p></div>
+  <div class="tile s3 tn rv"><span class="lbl">02</span><h3 class="big">Matched to your brief</h3><p class="fine">Every option is checked against your budget and needs before it reaches you.</p></div>
+  <div class="tile s3 rv"><span class="lbl">03</span><h3 class="big">Built for busy people</h3><p class="fine">No calls to dealers, no endless scrolling. A short list you can act on.</p></div>
+
+  <div class="tile s4 rv" id="pricing"><h2>Plans starting from AED 59</h2><p class="fine">Add help only when you need it. You get a clear quote on WhatsApp before anything is booked.</p></div>
+  <div class="tile tn s4 rv"><span class="lbl">Personalised car plan</span><p class="price">AED 59</p><p class="fine">Starting from. Matched listings from Dubai platforms, with direct links.</p></div>
+  <div class="tile s4 rv"><span class="lbl">Optional add-ons</span><p><b>Inspection</b> &middot; quoted per car</p><p><b>Closing the deal</b> &middot; quoted per deal</p><p><b>Registration</b> &middot; quoted per car</p></div>
+
+  <div class="tile dk s3 rv" id="how"><h2>How it works</h2><div class="orbit" style="max-width:250px" data-orbit><i></i><ul><li>1. Brief</li><li>2. Confirm</li><li>3. Search</li><li>4. Plan</li></ul></div></div>
+  <div class="tile dk s9 rv"><div class="road" data-z="6" style="background-image:url('assets/road/beach-road.jpg');background-size:cover;background-position:center"><div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,31,33,.78) 0%,rgba(2,31,33,.4) 42%,rgba(2,31,33,.08) 72%)"></div><svg viewBox="0 0 660 240" preserveAspectRatio="none" aria-hidden="true" style="position:relative;z-index:1"><path d="M20 200 C 150 40, 260 240, 380 60 S 560 40 640 120"/></svg><b style="z-index:2"></b><div style="position:absolute;left:8%;bottom:14%;max-width:60%;z-index:2"><p class="big" style="font-size:1.4rem">You share what you need once. We do the searching and reply on WhatsApp, usually within one working day.</p></div></div></div>
+
+  <section class="tile tn s4 rv" aria-labelledby="bh"><h2 id="bh">Tell us what you are looking for</h2><ul class="fine" style="padding-left:1.1rem;margin:0;display:grid;gap:.4rem"><li>Your phone number is how we identify your request.</li><li>We reply on WhatsApp to confirm your brief.</li><li>Your details are used only to prepare your plan.</li></ul></section>
+  <div class="tile s8 rv" id="brief">
+    <form id="leadForm" novalidate>
+      <div class="row"><div id="f-name"><label for="name">Your name</label><input type="text" id="name" autocomplete="name"><p class="err">Enter your name.</p></div>
+      <div id="f-phone"><label for="phone">Your phone number <span class="hint">(WhatsApp)</span></label><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+971 5X XXX XXXX"><p class="err">Enter a valid number with country code, for example +971 5X XXX XXXX.</p></div></div>
+      <div class="row"><div id="f-budget"><label for="budget">Budget for your car purchase</label><select id="budget"><option value="" disabled selected>Select your budget</option><option>Under AED 30,000</option><option>AED 30,000 to 60,000</option><option>AED 60,000 to 100,000</option><option>AED 100,000 to 200,000</option><option>AED 200,000 and above</option></select><p class="err">Select a budget.</p></div>
+      <div id="f-purpose"><label for="purpose">Purpose of buying</label><select id="purpose"><option value="" disabled selected>Select a purpose</option><option>Daily commute</option><option>Family use</option><option>Business or work</option><option>Weekend and leisure</option><option>First car</option><option>Resale or investment</option><option value="Other">Other</option></select><p class="err">Select a purpose.</p>
+        <div class="reveal" id="purposeOtherBox"><label for="purposeOther">Tell us your purpose</label><input type="text" id="purposeOther"><p class="err">Tell us your purpose.</p></div></div></div>
+      <fieldset id="f-type"><legend>Vehicle type</legend><div class="seg"><label><input type="radio" name="vtype" value="Sedan"><span>Sedan</span></label><label><input type="radio" name="vtype" value="SUV"><span>SUV</span></label><label><input type="radio" name="vtype" value="Coupe"><span>Coupe</span></label><label><input type="radio" name="vtype" value="Other"><span>Other</span></label></div><p class="err">Choose a vehicle type.</p>
+        <div class="reveal" id="typeOtherBox"><label for="typeOther">Add your own vehicle type</label><input type="text" id="typeOther" placeholder="For example: pickup, van, hatchback"><p class="err">Add your vehicle type.</p></div></fieldset>
+      <div><label for="models">Any specific models? <span class="hint">(optional)</span></label><input type="text" id="models" placeholder="For example: Toyota Camry, Lexus RX, Mazda CX-5"></div>
+      <div class="trap" aria-hidden="true"><label for="company">Leave this field empty</label><input type="text" id="company" name="_honey" tabindex="-1" autocomplete="off"></div>
+      <div class="consent" id="f-consent"><input type="checkbox" id="consent"><div><label for="consent">I agree that DENZ MOTORING may contact me on WhatsApp about this request.</label><p class="err">Tick the box so we can contact you.</p></div></div>
+      <div><button class="btn" type="submit" id="submitBtn">Submit</button><p class="status" id="status" role="status" aria-live="polite"></p><p id="fallback" hidden style="margin-top:.8rem"><a class="btn wa" id="waFallback" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></p></div>
+    </form>
+    <div class="done" id="done" tabindex="-1"><h3>Request received</h3><p>Thank you. We will review your brief and reply on WhatsApp.</p><p>We will reach you on<strong id="donePhone"></strong></p><p>Want a faster answer? Talk to Denz directly.</p><a class="btn wa" id="waLink" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+  </div>
+
+  <section class="tile s12 rv" id="faq"><h2>Common questions</h2><div class="faq">
+    <details><summary>How much does it cost?</summary><p>Plans are priced starting from AED 59. Inspection, closing the deal and registration are optional and quoted separately.</p></details>
+    <details><summary>What is a personalised plan?</summary><p>A plan built around your budget, purpose and vehicle type, with matched listings, direct links and a short note on each car.</p></details>
+    <details><summary>Do you sell cars?</summary><p>No. We advise and shortlist. You buy from the seller you choose.</p></details>
+    <details><summary>Which platforms do you search?</summary><p>We compare listings across Dubai car platforms and dealer sites, so you do not have to.</p></details>
+    <details><summary>Can you help with new cars too?</summary><p>Yes. Tell us the models or vehicle type you have in mind and we will work from there.</p></details>
+    <details><summary>Do you inspect cars and handle registration?</summary><p>Yes, as optional add-ons. Ask us for a quote on WhatsApp.</p></details></div></section>
+
+  <footer class="tile dk s4 rv"><a class="brand" href="#top">DENZ MOTORING</a><p class="fine" style="color:inherit;opacity:.8">Independent car buying consultation<br>Dubai, United Arab Emirates<br>Trade licence no. [add after issue]</p></footer>
+  <div class="tile dk s4 rv"><span class="lbl">Contact</span><a class="btn" href="https://wa.me/971551766850" target="_blank" rel="noopener">WhatsApp +971 55 176 6850</a></div>
+  <div class="tile dk s4 rv"><p class="fine" style="color:inherit;opacity:.8">&copy; 2026 DENZ MOTORING. All rights reserved. Listings come from third-party platforms; prices and availability can change without notice. Our advice is general and does not replace an inspection of the car you plan to buy.</p></div>
+</main>
+</div>
+<script>
+document.documentElement.classList.add("js");
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var CONFIG={whatsapp:"971551766850",email:"nasldenz@gmail.com"};
+var ENDPOINT="https://formsubmit.co/ajax/"+CONFIG.email;
+// Dubai clock
+function tick(){var e=document.getElementById("clock");if(e)e.textContent=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Dubai",hour:"2-digit",minute:"2-digit"}).format(new Date())}tick();setInterval(tick,30000);
+// reduced motion: stop background videos
+if(RM){document.querySelectorAll("video[autoplay]").forEach(function(v){v.pause();v.removeAttribute("autoplay")})}
+// scroll reveal
+(function(){var els=document.querySelectorAll(".rv");if(!("IntersectionObserver" in window)||RM){els.forEach(function(e){e.classList.add("in")});return}
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})})();
+// orbit highlight
+document.querySelectorAll("[data-orbit]").forEach(function(o){var li=o.querySelectorAll("li"),i=0,hold=false;function set(n){li.forEach(function(x,k){x.classList.toggle("on",k===n)})}set(0);
+li.forEach(function(x,k){x.addEventListener("mouseenter",function(){hold=true;set(k)});x.addEventListener("mouseleave",function(){hold=false})});
+if(!RM)setInterval(function(){if(!hold){i=(i+1)%li.length;set(i)}},2400)});
+// pointer tilt + parallax (fine pointers only)
+if(!RM&&matchMedia("(pointer: fine)").matches){var t1=document.querySelectorAll(".tilt"),zs=document.querySelectorAll("[data-z]");
+document.addEventListener("pointermove",function(e){var cx=e.clientX/innerWidth-.5,cy=e.clientY/innerHeight-.5;
+t1.forEach(function(t){t.style.setProperty("--rx",(-cy*7)+"deg");t.style.setProperty("--ry",(cx*9)+"deg")});
+zs.forEach(function(z){var d=+z.dataset.z;z.style.setProperty("--px",(cx*d)+"px");z.style.setProperty("--py",(cy*d)+"px")})})}
+// showreel nav
+(function(){var track=document.getElementById("reelTrack");if(!track)return;
+function step(dir){var card=track.querySelector(".reel-card");var w=card?card.getBoundingClientRect().width+16:300;track.scrollBy({left:dir*w,behavior:"smooth"})}
+var pv=document.getElementById("reelPrev"),nx=document.getElementById("reelNext");
+if(pv)pv.addEventListener("click",function(){step(-1)});
+if(nx)nx.addEventListener("click",function(){step(1)});
+track.addEventListener("keydown",function(e){if(e.key==="ArrowRight")step(1);if(e.key==="ArrowLeft")step(-1)})})();
+// form
+var form=document.getElementById("leadForm"),done=document.getElementById("done"),st=document.getElementById("status"),btn=document.getElementById("submitBtn"),fb=document.getElementById("fallback");
+function normalizePhone(raw){var s=raw.trim().replace(/[^\d+]/g,"");if(s.indexOf("00")===0){s="+"+s.slice(2)}else if(s.charAt(0)!=="+"){if(/^0\d{9}$/.test(s))s="+971"+s.slice(1);else if(/^971\d{9}$/.test(s))s="+"+s;else return""}
+s="+"+s.slice(1).replace(/\D/g,"");var n=s.length-1;return(n>=8&&n<=15)?s:""}
+function show(id,on){document.getElementById(id).classList.toggle("show",on)}
+function bad(id,b){document.getElementById(id).classList.toggle("invalid",b)}
+function rv(){var e=form.querySelector('input[name="vtype"]:checked');return e?e.value:""}
+var $=function(i){return document.getElementById(i)};
+$("purpose").addEventListener("change",function(){show("purposeOtherBox",this.value==="Other")});
+form.querySelectorAll('input[name="vtype"]').forEach(function(r){r.addEventListener("change",function(){show("typeOtherBox",rv()==="Other")})});
+function validate(){var p=[],ph=normalizePhone($("phone").value),v=rv();
+[["f-name",$("name").value.trim().length>1,$("name")],["f-phone",ph!=="",$("phone")],["f-budget",$("budget").value!=="",$("budget")],["f-purpose",$("purpose").value!=="",$("purpose")],["f-type",v!=="",form.querySelector('input[name="vtype"]')],["f-consent",$("consent").checked,$("consent")]].forEach(function(c){bad(c[0],!c[1]);if(!c[1])p.push(c[2])});
+var a=$("purpose").value!=="Other"||$("purposeOther").value.trim()!=="";bad("purposeOtherBox",!a);if(!a)p.push($("purposeOther"));
+var b=v!=="Other"||$("typeOther").value.trim()!=="";bad("typeOtherBox",!b);if(!b)p.push($("typeOther"));
+if(p.length){p[0].focus();return false}$("phone").value=ph;return true}
+form.addEventListener("submit",function(e){e.preventDefault();if($("company").value)return;if(!validate())return;
+var v=rv(),d={name:$("name").value.trim(),phone:$("phone").value,budget:$("budget").value,purpose:$("purpose").value==="Other"?"Other: "+$("purposeOther").value.trim():$("purpose").value,vtype:v==="Other"?"Other: "+$("typeOther").value.trim():v,models:$("models").value.trim()||"None given"};
+var txt=["Hi Denz, I would like a personalised car plan.","Name: "+d.name,"Phone: "+d.phone,"Budget: "+d.budget,"Purpose: "+d.purpose,"Vehicle type: "+d.vtype,"Specific models: "+d.models].join("\n");
+var wa="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(txt);
+var payload={"_subject":"New plan request: "+d.name+" ("+d.phone+")","_template":"table","Phone number (unique ID)":d.phone,"Name":d.name,"Budget":d.budget,"Purpose of buying":d.purpose,"Vehicle type":d.vtype,"Specific models":d.models,"Submitted":new Date().toISOString()};
+btn.disabled=true;btn.textContent="Sending...";st.className="status";st.textContent="";fb.hidden=true;
+var c=new AbortController(),tm=setTimeout(function(){c.abort()},15000);
+fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload),signal:c.signal})
+.then(function(r){return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,b:j}})})
+.then(function(r){clearTimeout(tm);var s=r.b&&r.b.success;if(r.ok&&(s===true||s==="true")){$("donePhone").textContent=d.phone;$("waLink").href=wa;form.style.display="none";done.classList.add("show");done.focus();done.scrollIntoView({behavior:"smooth",block:"center"})}else throw 0})
+.catch(function(){clearTimeout(tm);btn.disabled=false;btn.textContent="Submit";st.className="status error";st.textContent="We could not send your request by email. Please try again, or send the same details to us on WhatsApp.";$("waFallback").href=wa;fb.hidden=false})});
+</script>
+</body>
+</html>
