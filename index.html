@@ -11,76 +11,90 @@
 <style>
 :root{--p:#fff;--t:#E6FEFF;--k:#021F21;--g:#014751;--g2:#036E7C;--o:#0A2342;--m:#4B6367;--l:#C9E4E6;--err:#A63A28;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Public Sans",system-ui,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font:400 1rem/1.6 var(--sans);color:var(--k);background:var(--t);-webkit-font-smoothing:antialiased;padding:max(.75rem,env(safe-area-inset-top)) .75rem max(.75rem,env(safe-area-inset-bottom))}
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(40rem 30rem at 12% 8%,rgba(1,71,81,.22),transparent 70%),radial-gradient(38rem 30rem at 92% 30%,rgba(10,35,66,.16),transparent 70%),radial-gradient(34rem 26rem at 40% 100%,rgba(3,110,124,.18),transparent 70%)}
+body{margin:0;font:400 1rem/1.6 var(--sans);color:var(--k);background:var(--p);-webkit-font-smoothing:antialiased;padding-top:max(.75rem,env(safe-area-inset-top));padding-bottom:max(.75rem,env(safe-area-inset-bottom))}
 h1,h2,h3,p{margin:0}a{color:inherit}
 :focus-visible{outline:3px solid var(--g2);outline-offset:3px}
 h1,h2{font-family:var(--serif);font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:.01em}
 h2{font-size:clamp(1.9rem,3.4vw,2.9rem)}
 .lbl{font:600 .72rem/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
-.wrap{max-width:1400px;margin:0 auto}
+.wrap{max-width:1400px;margin:0 auto;padding-inline:.75rem}
 /* header */
-.bar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.7rem 1rem;margin-bottom:.75rem;background:rgba(255,255,255,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--l);border-radius:999px;box-shadow:0 14px 30px -20px rgba(2,31,33,.4);position:sticky;top:.5rem;z-index:10}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.7rem 1rem;background:rgba(255,255,255,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--l);border-radius:999px;box-shadow:0 14px 30px -20px rgba(2,31,33,.4);position:sticky;top:.5rem;z-index:10}
 .brand{font:700 1.15rem/1 var(--serif);letter-spacing:.14em;text-decoration:none;white-space:nowrap}
 .nav{display:flex;align-items:center;gap:1.25rem;font-size:.9rem}.nav a{text-decoration:none;color:var(--m)}.nav a:hover{color:var(--k)}
 .clock{font-size:.8rem;color:var(--m)}
 .promo{background:var(--g);color:#fff!important;font-weight:600;padding:.5rem .95rem;border-radius:999px;white-space:nowrap;font-size:.82rem}
 @media(max-width:820px){.nav a:not(.promo),.clock{display:none}}
-/* bento */
-.bento{display:grid;grid-template-columns:1fr;gap:1px;background:var(--l);border:1px solid var(--l);border-radius:22px;overflow:hidden;box-shadow:0 40px 70px -45px rgba(2,31,33,.5)}
-.tile{background:var(--p);padding:clamp(1.25rem,2.6vw,2rem);position:relative;overflow:hidden;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:1.25rem}
-.dk{background:var(--k);color:var(--t)}.ob{background:var(--o);color:var(--t)}.tn{background:var(--t)}
-@media(min-width:640px){.bento{grid-template-columns:repeat(2,1fr)}.s6,.s8,.s9,.s12{grid-column:1/-1}}
-@media(min-width:1000px){.bento{grid-template-columns:repeat(12,1fr)}.s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}.s8{grid-column:span 8}.s9{grid-column:span 9}.s12{grid-column:span 12}}
+/* bands */
+.band{padding-block:clamp(3.25rem,7vw,5.75rem)}
+.band-in{max-width:1200px;margin:0 auto;padding-inline:clamp(1.25rem,4vw,3rem)}
+.band+.band{border-top:1px solid rgba(2,31,33,.08)}
 .btn{display:inline-flex;align-items:center;gap:.6rem;font:600 .95rem/1 var(--sans);padding:.95rem 1.4rem;border:0;border-radius:999px;background:var(--g);color:#fff;text-decoration:none;cursor:pointer;transition:background .2s,transform .2s}
 .btn:hover{background:var(--g2);transform:translateY(-2px)}.btn[disabled]{opacity:.6;cursor:progress}
-.dk .btn,.ob .btn{background:var(--t);color:var(--k)}.dk .btn:hover,.ob .btn:hover{background:#fff}
-.btn.wa{background:var(--o)}.btn.line{background:transparent;color:inherit;border:1px solid currentColor}
+.band.dk .btn{background:var(--t);color:var(--k)}.band.dk .btn:hover{background:#fff}
+.btn.line{background:transparent;color:inherit;border:1px solid currentColor}
+.btn.wa{background:var(--o);color:#fff}.btn.wa:hover{background:#13366b}
+.band.dk .btn.line{border-color:rgba(230,254,255,.5)}
 .arr{display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid currentColor;text-decoration:none;flex:none;background:none;cursor:pointer;color:inherit;font-size:1.05rem}
 .arr:hover{background:rgba(2,31,33,.06)}
-/* spatial */
+/* spatial (kept minimal: hover tilt on poster cards + one parallax photo) */
 .tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;will-change:transform}
 [data-z]{transform:translate3d(var(--px,0),var(--py,0),0);transition:transform .25s ease-out}
-.js .rv{opacity:0;transform:translateY(26px) scale(.985)}.js .rv.in{opacity:1;transform:none;transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
-.orbit{position:relative;aspect-ratio:1;width:100%;max-width:340px;margin:auto;border:1px dashed currentColor;border-radius:50%;display:grid;place-items:center;opacity:.95}
-.orbit>i{position:absolute;inset:0;border-radius:50%;animation:spin 18s linear infinite}.orbit>i::before{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:currentColor}
-.orbit ul{list-style:none;margin:0;padding:0;font:600 .95rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;display:grid;gap:1.1rem;text-align:center}
-.orbit li{opacity:.4;transition:opacity .3s,transform .3s;cursor:default}.orbit li.on{opacity:1;transform:scale(1.12)}
-@keyframes spin{to{transform:rotate(360deg)}}
-.disc{width:min(440px,100%);aspect-ratio:1;margin:auto;border-radius:50%;display:grid;place-items:center;text-align:center;padding:12%;background:rgba(255,255,255,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.9);box-shadow:0 30px 60px -30px rgba(2,31,33,.55),inset 0 1px 0 #fff;position:relative}
-.disc h1{font-size:clamp(2rem,4.6vw,3.6rem);margin:.6rem 0 1rem}
-.car{width:100%;color:currentColor}.car *{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.vert{writing-mode:vertical-rl;transform:rotate(180deg);font:700 clamp(3.4rem,7vw,6rem)/.9 var(--serif);letter-spacing:.06em;color:var(--g);align-self:flex-start}
-.hero-a{min-height:520px;flex-direction:row;align-items:stretch}
-.hero-b{min-height:520px;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,var(--p),var(--t))}
+.js .rv{opacity:0;transform:translateY(18px)}.js .rv.in{opacity:1;transform:none;transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.2,1)}
 .big{font:500 clamp(1.5rem,2.6vw,2.4rem)/1.25 var(--serif)}.big b{font-weight:700}
-.cap{border-radius:999px;border:1px dashed currentColor;padding:1.4rem 2rem;display:flex;align-items:center;gap:1.5rem}
-.road{position:relative;min-height:260px;border-radius:120px;border:1px dashed currentColor;overflow:hidden}
-.road svg{position:absolute;inset:0;width:100%;height:100%}.road path{fill:none;stroke:currentColor;stroke-dasharray:6 8;stroke-width:1.5}
-.road b{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--t);offset-path:path('M20 200 C 150 40, 260 240, 380 60 S 560 40 640 120');animation:go 9s linear infinite}
-@keyframes go{to{offset-distance:100%}}
-.picks{display:grid;gap:1px;background:var(--l);border:1px solid var(--l);border-radius:16px;overflow:hidden}
-.pick{background:var(--p);padding:1rem 1.1rem}.pick strong{display:flex;justify-content:space-between;gap:1rem;font-weight:600}.pick strong span{font:700 1.25rem/1 var(--serif);white-space:nowrap}.pick small{display:block;color:var(--m);margin-top:.25rem}.pick em{display:block;font-style:normal;font-size:.9rem;margin-top:.4rem;padding-left:.7rem;border-left:2px solid var(--g)}
-@media(min-width:900px){.picks{grid-template-columns:repeat(3,1fr)}}
-.price{font:700 clamp(3rem,6vw,5rem)/1 var(--serif);color:var(--g)}
-.price-bar{display:flex;justify-content:space-between;gap:1rem;position:relative;flex-wrap:wrap}
-.price-bar-track{position:absolute;top:5px;left:14px;right:14px;height:1px;background:var(--l)}
-.price-bar-step{position:relative;flex:1;min-width:90px;text-align:center}
-.price-bar-dot{display:block;width:11px;height:11px;border-radius:50%;background:var(--g);margin:0 auto .65rem}
+.fine{font-size:.82rem;color:var(--m)}
+/* hero */
+.hero-in{max-width:760px}
+.hero-in h1{font-size:clamp(2.5rem,5.6vw,4.2rem);margin:.6rem 0 1.2rem;max-width:13ch}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+/* who we are / step */
+.about-grid{display:flex;flex-wrap:wrap;gap:clamp(2.5rem,5vw,4rem);justify-content:space-between}
+.about-grid>.main{flex:1 1 420px;max-width:620px}
+.about-grid>.step{flex:0 1 260px}
 /* showreel */
-.reel-media{position:relative}
+.showreel-grid{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center}
+@media(min-width:800px){.showreel-grid{grid-template-columns:1fr 1.15fr}}
+.reel-media{position:relative;border-radius:20px;overflow:hidden;min-height:300px}
 .reel-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(1) contrast(1.08)}
-.reel-media .ovl{position:relative;z-index:1;background:linear-gradient(180deg,rgba(230,254,255,0) 35%,rgba(230,254,255,.92) 100%);margin:-2rem;padding:2rem;min-height:320px;display:flex;align-items:flex-end}
-.reel-wrap{position:relative}
+.reel-media .ovl{position:relative;z-index:1;background:linear-gradient(180deg,rgba(10,35,66,0) 40%,rgba(10,35,66,.92) 100%);padding:1.5rem;min-height:300px;display:flex;align-items:flex-end}
+.reel-wrap{margin-top:clamp(2.5rem,5vw,4rem)}
 .reel-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.4rem .2rem 1.1rem;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .reel-track::-webkit-scrollbar{height:6px}
 .reel-track::-webkit-scrollbar-thumb{background:var(--l);border-radius:999px}
-.reel-card{flex:0 0 auto;width:min(76vw,290px);scroll-snap-align:center;margin:0;border:1px solid var(--l);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 26px 50px -30px rgba(2,31,33,.4)}
+.reel-card{flex:0 0 auto;width:min(76vw,290px);scroll-snap-align:center;margin:0;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 26px 50px -30px rgba(2,31,33,.5)}
 .reel-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
 .reel-card figcaption{padding:.8rem 1rem;font:600 .82rem/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--g);border-top:1px solid var(--l)}
 .reel-nav{display:flex;gap:.5rem;align-items:center}
 @media(min-width:1000px){.reel-card{width:260px}}
+/* sample shortlist */
+.picks{display:grid;gap:1px;background:var(--l);border:1px solid var(--l);border-radius:16px;overflow:hidden}
+.pick{background:var(--p);padding:1.1rem 1.2rem}.pick strong{display:flex;justify-content:space-between;gap:1rem;font-weight:600}.pick strong span{font:700 1.25rem/1 var(--serif);white-space:nowrap}.pick small{display:block;color:var(--m);margin-top:.25rem}.pick em{display:block;font-style:normal;font-size:.9rem;margin-top:.4rem;padding-left:.7rem;border-left:2px solid var(--g)}
+@media(min-width:900px){.picks{grid-template-columns:repeat(3,1fr)}}
+/* why choose: parallel features, no numbering */
+.pillars{display:grid;gap:clamp(1.75rem,3.5vw,2.75rem)}
+@media(min-width:800px){.pillars{grid-template-columns:repeat(3,1fr)}}
+/* pricing */
+.pricing-grid{display:grid;gap:1.5rem}
+@media(min-width:700px){.pricing-grid{grid-template-columns:1fr 1fr}}
+.price-card{padding:1.8rem 2rem;border:1px solid var(--l);border-radius:16px}
+.price-card.accent{background:var(--t);border-color:transparent}
+.price{font:700 clamp(2.6rem,5vw,4rem)/1 var(--serif);color:var(--g);margin:.5rem 0}
+/* horizontal tracker — used for pricing stages and the how-it-works sequence */
+.tracker{position:relative;margin-top:clamp(2.25rem,4.5vw,3.25rem)}
+.tracker-line{position:absolute;top:5px;left:6px;right:6px;height:1px;background:currentColor;opacity:.25}
+.tracker-row{list-style:none;margin:0;padding:0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;position:relative}
+.tracker-row>*{flex:1;min-width:92px;text-align:center}
+.tracker-row li{font:600 .76rem/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;opacity:.42;transition:opacity .35s}
+.tracker-row li.on{opacity:1}
+.tracker-dot{display:block;width:11px;height:11px;border-radius:50%;background:currentColor;margin:0 auto .65rem}
+/* how it works road */
+.road{position:relative;min-height:260px;border-radius:20px;border:1px solid rgba(230,254,255,.25);overflow:hidden;margin-top:clamp(2.25rem,4.5vw,3.25rem)}
+.road svg{position:absolute;inset:0;width:100%;height:100%}.road path{fill:none;stroke:currentColor;stroke-dasharray:6 8;stroke-width:1.5}
+.road b{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--t);offset-path:path('M20 200 C 150 40, 260 240, 380 60 S 560 40 640 120');animation:go 9s linear infinite}
+@keyframes go{to{offset-distance:100%}}
 /* form */
+.form-grid{display:grid;gap:clamp(2rem,4vw,3rem)}
+@media(min-width:900px){.form-grid{grid-template-columns:1fr 2fr}}
 form{display:grid;gap:1.1rem}.row{display:grid;gap:1.1rem}@media(min-width:640px){.row{grid-template-columns:1fr 1fr}}
 label,legend{display:block;font-weight:600;font-size:.9rem;margin-bottom:.35rem;padding:0}.hint{font-weight:400;color:var(--m)}
 input[type=text],input[type=tel],select{width:100%;font:400 1rem/1.4 var(--sans);color:var(--k);background:#fff;border:1px solid var(--l);border-radius:12px;padding:.8rem .9rem}
@@ -91,128 +105,195 @@ fieldset{border:0;margin:0;padding:0}.seg{display:flex;flex-wrap:wrap;gap:.5rem}
 .err{color:var(--err);font-size:.85rem;margin-top:.3rem;display:none}.invalid>.err,.invalid .err{display:block}.invalid input[type=text],.invalid input[type=tel],.invalid select{border-color:var(--err)}
 .status{font-size:.92rem}.status.error{color:var(--err)}.trap{position:absolute;left:-9999px}
 .done{display:none}.done.show{display:block}.done h3{font:700 2rem/1.1 var(--serif);text-transform:uppercase}.done p{margin:.7rem 0;color:var(--m)}.done strong{display:block;font:700 1.5rem/1.2 var(--serif);color:var(--k)}
+/* faq */
 details{border-top:1px solid var(--l);padding:1rem 0}summary{font-weight:600;cursor:pointer}details p{margin-top:.5rem;color:var(--m)}
 .faq{columns:1}@media(min-width:900px){.faq{columns:2;column-gap:3rem}details{break-inside:avoid}}
-.fine{font-size:.82rem;color:var(--m)}
-@media(prefers-reduced-motion:reduce){.orbit>i,.road b{animation:none}.tilt,[data-z]{transform:none!important}.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+/* footer */
+.footer-grid{display:grid;gap:2rem}
+@media(min-width:700px){.footer-grid{grid-template-columns:1.2fr 1fr 1.3fr;align-items:start}}
+@media(prefers-reduced-motion:reduce){.road b{animation:none}.tilt,[data-z]{transform:none!important}.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="bar">
-  <a class="brand" href="#top">DENZ MOTORING</a>
-  <nav class="nav" aria-label="Main"><span class="clock" aria-hidden="true">Dubai <span id="clock"></span></span><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a class="promo" href="#brief">Starting from AED 59</a></nav>
+<header class="wrap">
+  <div class="bar">
+    <a class="brand" href="#top">DENZ MOTORING</a>
+    <nav class="nav" aria-label="Main"><span class="clock" aria-hidden="true">Dubai <span id="clock"></span></span><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a class="promo" href="#brief">Starting from AED 59</a></nav>
+  </div>
 </header>
 
-<main class="bento" id="top">
-  <section class="tile s12 hero-b rv" aria-labelledby="h1" style="min-height:440px">
-    <div class="disc tilt" id="tilt1" data-z="0" style="max-width:600px">
-      <div><p class="lbl">Independent car buying consultation</p><h1 id="h1">Your next car, already shortlisted.</h1>
-      <p style="color:var(--m);margin-bottom:1.2rem">Tell us your budget and what you need. We check Dubai listings and send the few cars worth your time.</p>
-      <a class="btn" href="#brief">Get my personalised plan <span aria-hidden="true">&#8599;</span></a>
-      <p class="lbl" style="margin-top:1.1rem;opacity:.6;text-transform:none;letter-spacing:.02em;font-weight:500">Advice only &mdash; we don't sell cars. You deal directly with the seller you choose.</p></div>
+<main id="top">
+
+  <section class="band" style="background:var(--t)">
+    <div class="band-in hero-in rv">
+      <p class="lbl">Independent car buying consultation</p>
+      <h1 id="h1">Your next car, already shortlisted.</h1>
+      <p style="color:var(--m);font-size:1.08rem;max-width:42ch;margin-bottom:1.8rem">Tell us your budget and what you need. We check Dubai listings and send the few cars worth your time.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#brief">Get my personalised plan <span aria-hidden="true">&#8599;</span></a>
+        <a class="btn line" href="https://wa.me/971551766850" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+      <p class="fine" style="margin-top:1.4rem">Advice only &mdash; we don't sell cars. You deal directly with the seller you choose.</p>
     </div>
   </section>
 
-  <div class="tile s3 rv"><span class="lbl">Scroll down</span><a class="arr" href="#about" aria-label="Scroll to about">&darr;</a></div>
-  <div class="tile tn s6 rv"><span class="lbl">Need it faster?</span><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><p class="big">Talk to Denz directly.</p><a class="btn wa" href="https://wa.me/971551766850" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
-  <div class="tile s3 rv"><span class="lbl">Based in</span><p class="big">Dubai, UAE</p></div>
+  <section class="band dk" style="background:var(--o);color:var(--t)" id="showreel">
+    <div class="band-in">
+      <div class="showreel-grid rv">
+        <div>
+          <span class="lbl">Showreel</span>
+          <h2 style="font-size:clamp(1.8rem,3.2vw,2.6rem);margin-top:.6rem">Precision, down to the detail.</h2>
+          <p class="fine" style="color:var(--t);opacity:.85;margin-top:.9rem;max-width:38ch">Every car on our shortlist gets the same scrutiny &mdash; down to what's under the skin.</p>
+        </div>
+        <div class="reel-media">
+          <video autoplay muted loop playsinline aria-hidden="true" poster="assets/xray/xray-1.jpg"><source src="assets/xray/reel-1.mp4" type="video/mp4"></video>
+          <div class="ovl"><p class="big" style="font-size:1.2rem">Engineering-grade checks, explained in plain language &mdash; not jargon.</p></div>
+        </div>
+      </div>
 
-  <!-- Showreel -->
-  <div class="tile ob s4 rv" id="showreel"><span class="lbl">Showreel</span><h2 style="font-size:clamp(1.6rem,2.8vw,2.4rem)">Precision, down to the detail.</h2><p class="fine" style="color:var(--t);opacity:.85">Every car on our shortlist gets the same scrutiny &mdash; down to what's under the skin.</p></div>
-  <div class="tile s8 reel-media rv" style="padding:2rem;min-height:320px">
-    <video autoplay muted loop playsinline aria-hidden="true" poster="assets/xray/xray-1.jpg"><source src="assets/xray/reel-1.mp4" type="video/mp4"></video>
-    <div class="ovl"><p class="big" style="font-size:1.3rem">Engineering-grade checks, explained in plain language &mdash; not jargon.</p></div>
-  </div>
-
-  <div class="tile s12 reel-wrap rv" style="padding-bottom:1.25rem">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
-      <h2 style="font-size:clamp(1.5rem,2.6vw,2.2rem)">Cars from our showreel</h2>
-      <div class="reel-nav"><button class="arr" id="reelPrev" type="button" aria-label="Scroll left">&larr;</button><button class="arr" id="reelNext" type="button" aria-label="Scroll right">&rarr;</button></div>
+      <div class="reel-wrap rv">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+          <h2 style="font-size:clamp(1.4rem,2.4vw,2rem)">Cars from our showreel</h2>
+          <div class="reel-nav"><button class="arr" id="reelPrev" type="button" aria-label="Scroll left">&larr;</button><button class="arr" id="reelNext" type="button" aria-label="Scroll right">&rarr;</button></div>
+        </div>
+        <div class="reel-track" id="reelTrack" tabindex="0" aria-label="Car poster showreel, scroll horizontally">
+          <figure class="reel-card tilt" data-z="6"><img src="assets/posters/g63.jpg" alt="Mercedes-AMG G63 poster" loading="lazy"><figcaption>Mercedes-AMG G 63</figcaption></figure>
+          <figure class="reel-card tilt" data-z="6"><img src="assets/posters/pista.jpg" alt="Ferrari 488 Pista poster" loading="lazy"><figcaption>Ferrari 488 Pista</figcaption></figure>
+          <figure class="reel-card tilt" data-z="6"><img src="assets/posters/phantom.jpg" alt="Rolls-Royce Phantom VIII poster" loading="lazy"><figcaption>Rolls-Royce Phantom VIII</figcaption></figure>
+          <figure class="reel-card tilt" data-z="6"><img src="assets/posters/p1.jpg" alt="McLaren P1 poster" loading="lazy"><figcaption>McLaren P1</figcaption></figure>
+          <figure class="reel-card tilt" data-z="6"><img src="assets/posters/gt3rs.jpg" alt="Porsche 911 GT3 RS poster" loading="lazy"><figcaption>Porsche 911 GT3 RS</figcaption></figure>
+        </div>
+      </div>
     </div>
-    <div class="reel-track" id="reelTrack" tabindex="0" aria-label="Car poster showreel, scroll horizontally">
-      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/g63.jpg" alt="Mercedes-AMG G63 poster" loading="lazy"><figcaption>Mercedes-AMG G 63</figcaption></figure>
-      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/pista.jpg" alt="Ferrari 488 Pista poster" loading="lazy"><figcaption>Ferrari 488 Pista</figcaption></figure>
-      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/phantom.jpg" alt="Rolls-Royce Phantom VIII poster" loading="lazy"><figcaption>Rolls-Royce Phantom VIII</figcaption></figure>
-      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/p1.jpg" alt="McLaren P1 poster" loading="lazy"><figcaption>McLaren P1</figcaption></figure>
-      <figure class="reel-card tilt" data-z="6"><img src="assets/posters/gt3rs.jpg" alt="Porsche 911 GT3 RS poster" loading="lazy"><figcaption>Porsche 911 GT3 RS</figcaption></figure>
+  </section>
+
+  <section class="band dk" style="background:var(--k);color:var(--t)" id="about">
+    <div class="band-in about-grid rv">
+      <div class="main">
+        <h2>Who we are</h2>
+        <p class="big" style="font-size:clamp(1.3rem,2.2vw,1.8rem);margin-top:1rem">We are an <b>independent car buying consultation</b> service. We match busy people in Dubai with new or used cars that fit their budget and needs.</p>
+        <p class="fine" style="margin-top:1rem;opacity:.75">We do not sell cars. Our advice is about which car fits you, not which one is in stock.</p>
+        <a class="btn line" href="#why" style="margin-top:1.6rem">Explore &#8599;</a>
+      </div>
+      <div class="step">
+        <span class="lbl">Step one</span>
+        <p class="big" style="font-size:1.3rem;margin-top:.6rem">Send your brief.</p>
+        <p class="fine" style="margin-top:.5rem;opacity:.7">Two minutes on budget, purpose and vehicle type.</p>
+        <a class="btn" href="#brief" style="margin-top:1.3rem">Open form</a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="tile dk s12 rv" id="about" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:clamp(2rem,4vw,3.5rem)">
-    <div style="flex:1 1 380px;min-width:280px">
-      <h2>Who we are?</h2>
-      <p class="big" style="font-size:clamp(1.3rem,2.4vw,1.9rem);margin-top:1rem">We are an <b>independent car buying consultation</b> service. We match busy people in Dubai with new or used cars that fit their budget and needs.</p>
-      <p class="fine" style="margin-top:1rem;opacity:.75">We do not sell cars. Our advice is about which car fits you, not which one is in stock.</p>
-      <a class="btn line" href="#why" style="margin-top:1.4rem">Explore &#8599;</a>
+  <section class="band" id="sample">
+    <div class="band-in rv">
+      <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline;margin-bottom:1.5rem">
+        <h2 style="font-size:clamp(1.6rem,2.8vw,2.3rem)">Family SUV, up to AED 90,000</h2>
+        <span class="lbl">Sample shortlist &middot; illustrative only</span>
+      </div>
+      <div class="picks">
+        <div class="pick"><strong>2021 Toyota RAV4 XLE<span>AED 84,500</span></strong><small>58,000 km, GCC specs, private seller</small><em>Service history is shown in the listing. Ask to see the records.</em></div>
+        <div class="pick"><strong>2020 Nissan X-Trail<span>AED 62,000</span></strong><small>71,000 km, GCC specs, dealer</small><em>Lowest price of the three, higher mileage. Inspect before paying a deposit.</em></div>
+        <div class="pick"><strong>2022 Hyundai Tucson<span>AED 79,900</span></strong><small>39,000 km, GCC specs, dealer</small><em>Lowest mileage in this budget. Check the warranty transfer.</em></div>
+      </div>
     </div>
-    <div style="flex:0 1 240px;text-align:center">
-      <span class="lbl">Step one</span>
-      <div class="orbit" style="max-width:210px;margin:.9rem auto"><i></i><div style="text-align:center;padding:1rem"><p class="big" style="font-size:1.2rem">Send your brief</p></div></div>
-      <a class="btn" href="#brief">Open form</a>
+  </section>
+
+  <section class="band" id="why" style="background:var(--t)">
+    <div class="band-in rv">
+      <div style="margin-bottom:clamp(1.75rem,3.5vw,2.75rem)"><h2>Why choose Denz?</h2><span class="lbl">Advice that works for you</span></div>
+      <div class="pillars">
+        <div><h3 class="big">Independent</h3><p class="fine" style="margin-top:.6rem">Our advice is about which car fits you, not which one is in stock.</p></div>
+        <div><h3 class="big">Matched to your brief</h3><p class="fine" style="margin-top:.6rem">Every option is checked against your budget and needs before it reaches you.</p></div>
+        <div><h3 class="big">Built for busy people</h3><p class="fine" style="margin-top:.6rem">No calls to dealers, no endless scrolling. A short list you can act on.</p></div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="tile s12 tn rv" id="sample"><div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline"><h2 style="font-size:clamp(1.5rem,2.6vw,2.2rem)">Family SUV, up to AED 90,000</h2><span class="lbl">Sample shortlist &middot; illustrative only</span></div>
-    <div class="picks">
-      <div class="pick"><strong>2021 Toyota RAV4 XLE<span>AED 84,500</span></strong><small>58,000 km, GCC specs, private seller</small><em>Service history is shown in the listing. Ask to see the records.</em></div>
-      <div class="pick"><strong>2020 Nissan X-Trail<span>AED 62,000</span></strong><small>71,000 km, GCC specs, dealer</small><em>Lowest price of the three, higher mileage. Inspect before paying a deposit.</em></div>
-      <div class="pick"><strong>2022 Hyundai Tucson<span>AED 79,900</span></strong><small>39,000 km, GCC specs, dealer</small><em>Lowest mileage in this budget. Check the warranty transfer.</em></div>
-    </div></div>
-
-  <div class="tile s3 rv" id="why"><h2>Why choose Denz?</h2><span class="lbl">Advice that works for you</span></div>
-  <div class="tile s3 rv"><span class="lbl">01</span><h3 class="big">Independent</h3><p class="fine">Our advice is about which car fits you, not which one is in stock.</p></div>
-  <div class="tile s3 tn rv"><span class="lbl">02</span><h3 class="big">Matched to your brief</h3><p class="fine">Every option is checked against your budget and needs before it reaches you.</p></div>
-  <div class="tile s3 rv"><span class="lbl">03</span><h3 class="big">Built for busy people</h3><p class="fine">No calls to dealers, no endless scrolling. A short list you can act on.</p></div>
-
-  <div class="tile s4 rv" id="pricing"><h2>Plans starting from AED 59</h2><p class="fine">Add help only when you need it. You get a clear quote on WhatsApp before anything is booked.</p></div>
-  <div class="tile tn s4 rv"><span class="lbl">Personalised car plan</span><p class="price">AED 59</p><p class="fine">Starting from. Matched listings from Dubai platforms, with direct links.</p></div>
-  <div class="tile s4 rv"><span class="lbl">Optional add-ons</span><p><b>Inspection</b> &middot; quoted per car</p><p><b>Closing the deal</b> &middot; quoted per deal</p><p><b>Registration</b> &middot; quoted per car</p></div>
-
-  <div class="tile s12 rv" style="padding-top:1.5rem;padding-bottom:1.5rem">
-    <div class="price-bar" aria-hidden="true">
-      <div class="price-bar-track"></div>
-      <div class="price-bar-step"><span class="price-bar-dot"></span><p class="lbl">Plan<br><b style="font:700 1rem var(--serif);color:var(--k);letter-spacing:0;text-transform:none">AED 59</b></p></div>
-      <div class="price-bar-step"><span class="price-bar-dot"></span><p class="lbl">Inspection<br><span style="opacity:.7">optional</span></p></div>
-      <div class="price-bar-step"><span class="price-bar-dot"></span><p class="lbl">Closing<br><span style="opacity:.7">optional</span></p></div>
-      <div class="price-bar-step"><span class="price-bar-dot"></span><p class="lbl">Registration<br><span style="opacity:.7">optional</span></p></div>
+  <section class="band" id="pricing">
+    <div class="band-in rv">
+      <div style="margin-bottom:clamp(2rem,4vw,3rem)"><h2>Plans starting from AED 59</h2><p class="fine" style="margin-top:.5rem;max-width:48ch">Add help only when you need it. You get a clear quote on WhatsApp before anything is booked.</p></div>
+      <div class="pricing-grid">
+        <div class="price-card accent"><span class="lbl">Personalised car plan</span><p class="price">AED 59</p><p class="fine">Starting from. Matched listings from Dubai platforms, with direct links.</p></div>
+        <div class="price-card"><span class="lbl">Optional add-ons</span><p style="margin-top:.7rem"><b>Inspection</b> &middot; quoted per car</p><p style="margin-top:.4rem"><b>Closing the deal</b> &middot; quoted per deal</p><p style="margin-top:.4rem"><b>Registration</b> &middot; quoted per car</p></div>
+      </div>
+      <div class="tracker" aria-hidden="true">
+        <div class="tracker-line"></div>
+        <div class="tracker-row">
+          <div><span class="tracker-dot"></span><span class="lbl">Plan</span></div>
+          <div><span class="tracker-dot" style="opacity:.4"></span><span class="lbl" style="opacity:.6">Inspection</span></div>
+          <div><span class="tracker-dot" style="opacity:.4"></span><span class="lbl" style="opacity:.6">Closing</span></div>
+          <div><span class="tracker-dot" style="opacity:.4"></span><span class="lbl" style="opacity:.6">Registration</span></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="tile dk s3 rv" id="how"><h2>How it works</h2><div class="orbit" style="max-width:250px" data-orbit><i></i><ul><li>1. Brief</li><li>2. Confirm</li><li>3. Search</li><li>4. Plan</li></ul></div></div>
-  <div class="tile dk s9 rv"><div class="road" data-z="6" style="background-image:url('assets/road/beach-road.jpg');background-size:cover;background-position:center"><div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,31,33,.78) 0%,rgba(2,31,33,.4) 42%,rgba(2,31,33,.08) 72%)"></div><svg viewBox="0 0 660 240" preserveAspectRatio="none" aria-hidden="true" style="position:relative;z-index:1"><path d="M20 200 C 150 40, 260 240, 380 60 S 560 40 640 120"/></svg><b style="z-index:2"></b><div style="position:absolute;left:8%;bottom:14%;max-width:60%;z-index:2"><p class="big" style="font-size:1.4rem">You share what you need once. We do the searching and reply on WhatsApp, usually within one working day.</p></div></div></div>
+  <section class="band dk" id="how" style="background:var(--k);color:var(--t)">
+    <div class="band-in rv">
+      <h2>How it works</h2>
+      <div class="tracker" data-orbit>
+        <div class="tracker-line"></div>
+        <ul class="tracker-row">
+          <li>1. Brief</li><li>2. Confirm</li><li>3. Search</li><li>4. Plan</li>
+        </ul>
+      </div>
+      <div class="road" data-z="6" style="background-image:url('assets/road/beach-road.jpg');background-size:cover;background-position:center">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,31,33,.78) 0%,rgba(2,31,33,.4) 42%,rgba(2,31,33,.08) 72%)"></div>
+        <svg viewBox="0 0 660 240" preserveAspectRatio="none" aria-hidden="true" style="position:relative;z-index:1"><path d="M20 200 C 150 40, 260 240, 380 60 S 560 40 640 120"/></svg>
+        <b style="z-index:2"></b>
+        <div style="position:absolute;left:8%;bottom:14%;max-width:60%;z-index:2"><p class="big" style="font-size:1.4rem">You share what you need once. We do the searching and reply on WhatsApp, usually within one working day.</p></div>
+      </div>
+    </div>
+  </section>
 
-  <section class="tile tn s4 rv" aria-labelledby="bh"><h2 id="bh">Tell us what you are looking for</h2><p class="fine" style="margin-top:.9rem;line-height:1.65">Your phone number identifies your request. We reply on WhatsApp to confirm your brief, and your details are used only to prepare your plan.</p></section>
-  <div class="tile s8 rv" id="brief">
-    <form id="leadForm" novalidate>
-      <div class="row"><div id="f-name"><label for="name">Your name</label><input type="text" id="name" autocomplete="name"><p class="err">Enter your name.</p></div>
-      <div id="f-phone"><label for="phone">Your phone number <span class="hint">(WhatsApp)</span></label><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+971 5X XXX XXXX"><p class="err">Enter a valid number with country code, for example +971 5X XXX XXXX.</p></div></div>
-      <div class="row"><div id="f-budget"><label for="budget">Budget for your car purchase</label><select id="budget"><option value="" disabled selected>Select your budget</option><option>Under AED 30,000</option><option>AED 30,000 to 60,000</option><option>AED 60,000 to 100,000</option><option>AED 100,000 to 200,000</option><option>AED 200,000 and above</option></select><p class="err">Select a budget.</p></div>
-      <div id="f-purpose"><label for="purpose">Purpose of buying</label><select id="purpose"><option value="" disabled selected>Select a purpose</option><option>Daily commute</option><option>Family use</option><option>Business or work</option><option>Weekend and leisure</option><option>First car</option><option>Resale or investment</option><option value="Other">Other</option></select><p class="err">Select a purpose.</p>
-        <div class="reveal" id="purposeOtherBox"><label for="purposeOther">Tell us your purpose</label><input type="text" id="purposeOther"><p class="err">Tell us your purpose.</p></div></div></div>
-      <fieldset id="f-type"><legend>Vehicle type</legend><div class="seg"><label><input type="radio" name="vtype" value="Sedan"><span>Sedan</span></label><label><input type="radio" name="vtype" value="SUV"><span>SUV</span></label><label><input type="radio" name="vtype" value="Coupe"><span>Coupe</span></label><label><input type="radio" name="vtype" value="Other"><span>Other</span></label></div><p class="err">Choose a vehicle type.</p>
-        <div class="reveal" id="typeOtherBox"><label for="typeOther">Add your own vehicle type</label><input type="text" id="typeOther" placeholder="For example: pickup, van, hatchback"><p class="err">Add your vehicle type.</p></div></fieldset>
-      <div><label for="models">Any specific models? <span class="hint">(optional)</span></label><input type="text" id="models" placeholder="For example: Toyota Camry, Lexus RX, Mazda CX-5"></div>
-      <div class="trap" aria-hidden="true"><label for="company">Leave this field empty</label><input type="text" id="company" name="_honey" tabindex="-1" autocomplete="off"></div>
-      <div class="consent" id="f-consent"><input type="checkbox" id="consent"><div><label for="consent">I agree that DENZ MOTORING may contact me on WhatsApp about this request.</label><p class="err">Tick the box so we can contact you.</p></div></div>
-      <div><button class="btn" type="submit" id="submitBtn">Submit</button><p class="status" id="status" role="status" aria-live="polite"></p><p id="fallback" hidden style="margin-top:.8rem"><a class="btn wa" id="waFallback" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></p></div>
-    </form>
-    <div class="done" id="done" tabindex="-1"><h3>Request received</h3><p>Thank you. We will review your brief and reply on WhatsApp.</p><p>We will reach you on<strong id="donePhone"></strong></p><p>Want a faster answer? Talk to Denz directly.</p><a class="btn wa" id="waLink" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
-  </div>
+  <section class="band" style="background:var(--t)" aria-labelledby="bh">
+    <div class="band-in form-grid rv">
+      <div>
+        <h2 id="bh">Tell us what you are looking for</h2>
+        <p class="fine" style="margin-top:.9rem;max-width:40ch;line-height:1.65">Your phone number identifies your request. We reply on WhatsApp to confirm your brief, and your details are used only to prepare your plan.</p>
+      </div>
+      <div id="brief">
+        <form id="leadForm" novalidate>
+          <div class="row"><div id="f-name"><label for="name">Your name</label><input type="text" id="name" autocomplete="name"><p class="err">Enter your name.</p></div>
+          <div id="f-phone"><label for="phone">Your phone number <span class="hint">(WhatsApp)</span></label><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+971 5X XXX XXXX"><p class="err">Enter a valid number with country code, for example +971 5X XXX XXXX.</p></div></div>
+          <div class="row"><div id="f-budget"><label for="budget">Budget for your car purchase</label><select id="budget"><option value="" disabled selected>Select your budget</option><option>Under AED 30,000</option><option>AED 30,000 to 60,000</option><option>AED 60,000 to 100,000</option><option>AED 100,000 to 200,000</option><option>AED 200,000 and above</option></select><p class="err">Select a budget.</p></div>
+          <div id="f-purpose"><label for="purpose">Purpose of buying</label><select id="purpose"><option value="" disabled selected>Select a purpose</option><option>Daily commute</option><option>Family use</option><option>Business or work</option><option>Weekend and leisure</option><option>First car</option><option>Resale or investment</option><option value="Other">Other</option></select><p class="err">Select a purpose.</p>
+            <div class="reveal" id="purposeOtherBox"><label for="purposeOther">Tell us your purpose</label><input type="text" id="purposeOther"><p class="err">Tell us your purpose.</p></div></div></div>
+          <fieldset id="f-type"><legend>Vehicle type</legend><div class="seg"><label><input type="radio" name="vtype" value="Sedan"><span>Sedan</span></label><label><input type="radio" name="vtype" value="SUV"><span>SUV</span></label><label><input type="radio" name="vtype" value="Coupe"><span>Coupe</span></label><label><input type="radio" name="vtype" value="Other"><span>Other</span></label></div><p class="err">Choose a vehicle type.</p>
+            <div class="reveal" id="typeOtherBox"><label for="typeOther">Add your own vehicle type</label><input type="text" id="typeOther" placeholder="For example: pickup, van, hatchback"><p class="err">Add your vehicle type.</p></div></fieldset>
+          <div><label for="models">Any specific models? <span class="hint">(optional)</span></label><input type="text" id="models" placeholder="For example: Toyota Camry, Lexus RX, Mazda CX-5"></div>
+          <div class="trap" aria-hidden="true"><label for="company">Leave this field empty</label><input type="text" id="company" name="_honey" tabindex="-1" autocomplete="off"></div>
+          <div class="consent" id="f-consent"><input type="checkbox" id="consent"><div><label for="consent">I agree that DENZ MOTORING may contact me on WhatsApp about this request.</label><p class="err">Tick the box so we can contact you.</p></div></div>
+          <div><button class="btn" type="submit" id="submitBtn">Submit</button><p class="status" id="status" role="status" aria-live="polite"></p><p id="fallback" hidden style="margin-top:.8rem"><a class="btn wa" id="waFallback" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></p></div>
+        </form>
+        <div class="done" id="done" tabindex="-1"><h3>Request received</h3><p>Thank you. We will review your brief and reply on WhatsApp.</p><p>We will reach you on<strong id="donePhone"></strong></p><p>Want a faster answer? Talk to Denz directly.</p><a class="btn wa" id="waLink" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+      </div>
+    </div>
+  </section>
 
-  <section class="tile s12 rv" id="faq"><h2>Common questions</h2><div class="faq">
-    <details><summary>How much does it cost?</summary><p>Plans are priced starting from AED 59. Inspection, closing the deal and registration are optional and quoted separately.</p></details>
-    <details><summary>What is a personalised plan?</summary><p>A plan built around your budget, purpose and vehicle type, with matched listings, direct links and a short note on each car.</p></details>
-    <details><summary>Do you sell cars?</summary><p>No. We advise and shortlist. You buy from the seller you choose.</p></details>
-    <details><summary>Which platforms do you search?</summary><p>We compare listings across Dubai car platforms and dealer sites, so you do not have to.</p></details>
-    <details><summary>Can you help with new cars too?</summary><p>Yes. Tell us the models or vehicle type you have in mind and we will work from there.</p></details>
-    <details><summary>Do you inspect cars and handle registration?</summary><p>Yes, as optional add-ons. Ask us for a quote on WhatsApp.</p></details></div></section>
+  <section class="band" id="faq">
+    <div class="band-in rv">
+      <h2>Common questions</h2>
+      <div class="faq" style="margin-top:1.5rem">
+        <details><summary>How much does it cost?</summary><p>Plans are priced starting from AED 59. Inspection, closing the deal and registration are optional and quoted separately.</p></details>
+        <details><summary>What is a personalised plan?</summary><p>A plan built around your budget, purpose and vehicle type, with matched listings, direct links and a short note on each car.</p></details>
+        <details><summary>Do you sell cars?</summary><p>No. We advise and shortlist. You buy from the seller you choose.</p></details>
+        <details><summary>Which platforms do you search?</summary><p>We compare listings across Dubai car platforms and dealer sites, so you do not have to.</p></details>
+        <details><summary>Can you help with new cars too?</summary><p>Yes. Tell us the models or vehicle type you have in mind and we will work from there.</p></details>
+        <details><summary>Do you inspect cars and handle registration?</summary><p>Yes, as optional add-ons. Ask us for a quote on WhatsApp.</p></details>
+      </div>
+    </div>
+  </section>
 
-  <footer class="tile dk s4 rv"><a class="brand" href="#top">DENZ MOTORING</a><p class="fine" style="color:inherit;opacity:.8">Independent car buying consultation<br>Dubai, United Arab Emirates<br>Trade licence no. [add after issue]</p></footer>
-  <div class="tile dk s4 rv"><span class="lbl">Contact</span><a class="btn" href="https://wa.me/971551766850" target="_blank" rel="noopener">WhatsApp +971 55 176 6850</a></div>
-  <div class="tile dk s4 rv"><p class="fine" style="color:inherit;opacity:.8">&copy; 2026 DENZ MOTORING. All rights reserved. Listings come from third-party platforms; prices and availability can change without notice. Our advice is general and does not replace an inspection of the car you plan to buy.</p></div>
+  <footer class="band dk" style="background:var(--k);color:var(--t)">
+    <div class="band-in footer-grid">
+      <div><a class="brand" href="#top">DENZ MOTORING</a><p class="fine" style="color:inherit;opacity:.8;margin-top:.8rem">Independent car buying consultation<br>Dubai, United Arab Emirates<br>Trade licence no. [add after issue]</p></div>
+      <div><span class="lbl">Contact</span><br><a class="btn" href="https://wa.me/971551766850" style="margin-top:.8rem" target="_blank" rel="noopener">WhatsApp +971 55 176 6850</a></div>
+      <p class="fine" style="color:inherit;opacity:.8">&copy; 2026 DENZ MOTORING. All rights reserved. Listings come from third-party platforms; prices and availability can change without notice. Our advice is general and does not replace an inspection of the car you plan to buy.</p>
+    </div>
+  </footer>
+
 </main>
-</div>
 <script>
 document.documentElement.classList.add("js");
 var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -225,7 +306,7 @@ if(RM){document.querySelectorAll("video[autoplay]").forEach(function(v){v.pause(
 // scroll reveal
 (function(){var els=document.querySelectorAll(".rv");if(!("IntersectionObserver" in window)||RM){els.forEach(function(e){e.classList.add("in")});return}
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})})();
-// orbit highlight
+// tracker highlight (how it works)
 document.querySelectorAll("[data-orbit]").forEach(function(o){var li=o.querySelectorAll("li"),i=0,hold=false;function set(n){li.forEach(function(x,k){x.classList.toggle("on",k===n)})}set(0);
 li.forEach(function(x,k){x.addEventListener("mouseenter",function(){hold=true;set(k)});x.addEventListener("mouseleave",function(){hold=false})});
 if(!RM)setInterval(function(){if(!hold){i=(i+1)%li.length;set(i)}},2400)});
